@@ -1,0 +1,388 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{F52B99F3-24B9-4332-A5F1-F722CA79004F}</ProjectGuid>
+    <RootNamespace>StarSharesclient</RootNamespace>
+    <Keyword>MFCProj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+    <UseOfMfc>Static</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+    <UseOfMfc>Static</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>..\lib;</AdditionalLibraryDirectories>
+    </Link>
+    <Midl>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+      <ValidateAllParameters>true</ValidateAllParameters>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </Midl>
+    <ResourceCompile>
+      <Culture>0x0804</Culture>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+    <Midl>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+      <ValidateAllParameters>true</ValidateAllParameters>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </Midl>
+    <ResourceCompile>
+      <Culture>0x0804</Culture>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <None Include="C:\Users\Administrator\Desktop\unlock.bmp" />
+    <None Include="json\json_internalarray.inl" />
+    <None Include="json\json_internalmap.inl" />
+    <None Include="json\json_valueiterator.inl" />
+    <None Include="ReadMe.txt" />
+    <None Include="res\a.bmp" />
+    <None Include="res\address_book.bmp" />
+    <None Include="res\application_ash.bmp" />
+    <None Include="res\application_gules.bmp" />
+    <None Include="res\application_log_1.bmp" />
+    <None Include="res\application_log_2.bmp" />
+    <None Include="res\background.bmp" />
+    <None Include="res\btn1.bmp" />
+    <None Include="res\btn2.bmp" />
+    <None Include="res\buton.bmp" />
+    <None Include="res\close._1.bmp" />
+    <None Include="res\close._2.bmp" />
+    <None Include="res\error_.ico" />
+    <None Include="res\fukuan.bmp" />
+    <None Include="res\fxzc_yrgzc.bmp" />
+    <None Include="res\gddt_ash.bmp" />
+    <None Include="res\gddt_bluw.bmp" />
+    <None Include="res\hide._1.bmp" />
+    <None Include="res\hide._2.bmp" />
+    <None Include="res\jhdz_blue.bmp" />
+    <None Include="res\jhdz_gules.bmp" />
+    <None Include="res\lAPOEyk1PWTNAV4_350_100.bmp" />
+    <None Include="res\lock.bmp" />
+    <None Include="res\main.bmp" />
+    <None Include="res\main_log_1.bmp" />
+    <None Include="res\main_log_2.bmp" />
+    <None Include="res\main_wdzc.bmp" />
+    <None Include="res\MY_ash.bmp" />
+    <None Include="res\MY_gules.bmp" />
+    <None Include="res\qbjyxq_ash.bmp" />
+    <None Include="res\qbjyxq_bluw.bmp" />
+    <None Include="res\rev_logo_1.bmp" />
+    <None Include="res\rev_logo_2.bmp" />
+    <None Include="res\rgzc_zcmc.bmp" />
+    <None Include="res\SC_IN_TRADE.bmp" />
+    <None Include="res\send_logo_1.bmp" />
+    <None Include="res\send_logo_2.bmp" />
+    <None Include="res\set_1.bmp" />
+    <None Include="res\set_2.bmp" />
+    <None Include="res\set_dcsy.bmp" />
+    <None Include="res\set_dcsy_click.bmp" />
+    <None Include="res\set_drsy.bmp" />
+    <None Include="res\set_drsy_click.bmp" />
+    <None Include="res\set_gbts.bmp" />
+    <None Include="res\set_gbts_click.bmp" />
+    <None Include="res\set_mrsz.bmp" />
+    <None Include="res\set_mrsz_click.bmp" />
+    <None Include="res\set_pass.bmp" />
+    <None Include="res\set_pass_click.bmp" />
+    <None Include="res\set_qb.bmp" />
+    <None Include="res\set_qbbf.bmp" />
+    <None Include="res\set_qbbf_click.bmp" />
+    <None Include="res\set_qbsd.bmp" />
+    <None Include="res\set_qbsd_click.bmp" />
+    <None Include="res\set_qb_click.bmp" />
+    <None Include="res\set_rpc.bmp" />
+    <None Include="res\set_rpc_click.bmp" />
+    <None Include="res\sig_0.bmp" />
+    <None Include="res\sig_1.bmp" />
+    <None Include="res\sig_2.bmp" />
+    <None Include="res\sig_3.bmp" />
+    <None Include="res\StarSharesclient.ico" />
+    <None Include="res\StarSharesclient.rc2" />
+    <None Include="res\status_bj.bmp" />
+    <None Include="res\subscription_ash.bmp" />
+    <None Include="res\subscription_gules.bmp" />
+    <None Include="res\tck.bmp" />
+    <None Include="res\tck_1.bmp" />
+    <None Include="res\tck_2.bmp" />
+    <None Include="res\tck_close1.bmp" />
+    <None Include="res\tck_close2.bmp" />
+    <None Include="res\tck_qk.bmp" />
+    <None Include="res\tck_qk2.bmp" />
+    <None Include="res\tck_qr.bmp" />
+    <None Include="res\tck_qx.bmp" />
+    <None Include="res\tip_icon.ico" />
+    <None Include="res\tk_close1.bmp" />
+    <None Include="res\tk_close2.bmp" />
+    <None Include="res\tradedetail_logo_1.bmp" />
+    <None Include="res\tradedetail_logo_2.bmp" />
+    <None Include="res\ts_qr.bmp" />
+    <None Include="res\unlock.bmp" />
+    <None Include="res\warning_.ico" />
+    <None Include="res\wdzc_ash.bmp" />
+    <None Include="res\wdzc_blue.bmp" />
+    <None Include="res\WDZC_BTN_ORIGI.bmp" />
+    <None Include="res\WDZC_BUT_ORANGE.bmp" />
+    <None Include="res\wdzc_zcxq.bmp" />
+    <None Include="res\wdzc_zrxq.bmp" />
+    <None Include="res\yoye_cm.bmp" />
+    <None Include="res\yoye_zh.bmp" />
+    <None Include="res\YYYE_blue.bmp" />
+    <None Include="res\YYYE_red.bmp" />
+    <None Include="res\Yzcrg_ash.bmp" />
+    <None Include="res\Yzcrg_blue.bmp" />
+    <None Include="res\ZCIN.bmp" />
+    <None Include="res\ZCOUT.bmp" />
+    <None Include="res\zcrg_xx.bmp" />
+    <None Include="res\zczc-zxxq.bmp" />
+    <None Include="res\zczr-zrxq.bmp" />
+    <None Include="res\Zzcrg_ash.bmp" />
+    <None Include="res\Zzcrg_blue.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AddrBook.h" />
+    <ClInclude Include="AppsDlg.h" />
+    <ClInclude Include="AutoComplete.h" />
+    <ClInclude Include="BalloonTip.h" />
+    <ClInclude Include="BaseDlg.h" />
+    <ClInclude Include="BmpBtn.h" />
+    <ClInclude Include="BtnST.h" />
+    <ClInclude Include="ButtonEx.h" />
+    <ClInclude Include="CApplication.h" />
+    <ClInclude Include="CeXDib.h" />
+    <ClInclude Include="CFont0.h" />
+    <ClInclude Include="ChangPassWord.h" />
+    <ClInclude Include="circleprogressctl.h" />
+    <ClInclude Include="CJFlatComboBox.h" />
+    <ClInclude Include="ComBoxEx.h" />
+    <ClInclude Include="CommonStruct.h" />
+    <ClInclude Include="config.h" />
+    <ClInclude Include="CRange.h" />
+    <ClInclude Include="CWorkbook.h" />
+    <ClInclude Include="CWorkbooks.h" />
+    <ClInclude Include="CWorksheet.h" />
+    <ClInclude Include="CWorksheets.h" />
+    <ClInclude Include="EasyFont.h" />
+    <ClInclude Include="EncryptWallet.h" />
+    <ClInclude Include="GIFControl.h" />
+    <ClInclude Include="HeaderCtrlCl.h" />
+    <ClInclude Include="HSocket.h" />
+    <ClInclude Include="HyperLink.h" />
+    <ClInclude Include="JsonConfigHelp.h" />
+    <ClInclude Include="json\assertions.h" />
+    <ClInclude Include="json\autolink.h" />
+    <ClInclude Include="json\config.h" />
+    <ClInclude Include="json\features.h" />
+    <ClInclude Include="json\forwards.h" />
+    <ClInclude Include="json\json.h" />
+    <ClInclude Include="json\json_batchallocator.h" />
+    <ClInclude Include="json\json_tool.h" />
+    <ClInclude Include="json\reader.h" />
+    <ClInclude Include="json\value.h" />
+    <ClInclude Include="json\version.h" />
+    <ClInclude Include="json\writer.h" />
+    <ClInclude Include="ListCtrlCl.h" />
+    <ClInclude Include="Log.h" />
+    <ClInclude Include="MainDlg.h" />
+    <ClInclude Include="MessageBoxEx.h" />
+    <ClInclude Include="MyMutex.h" />
+    <ClInclude Include="MyQueue.h" />
+    <ClInclude Include="NewAddressDlg.h" />
+    <ClInclude Include="NewSendAddr.h" />
+    <ClInclude Include="NoUiMsgBuffer.h" />
+    <ClInclude Include="OutGifDlg.h" />
+    <ClInclude Include="PayDlg.h" />
+    <ClInclude Include="PostMsg.h" />
+    <ClInclude Include="ProgStatusDlg.h" />
+    <ClInclude Include="RecvDlg.h" />
+    <ClInclude Include="Reminderdlg.h" />
+    <ClInclude Include="Resource.h" />
+    <ClInclude Include="RGZCDlg.h" />
+    <ClInclude Include="RollDlg.h" />
+    <ClInclude Include="RoundButton.h" />
+    <ClInclude Include="RpcCmd.h" />
+    <ClInclude Include="RPCDlg.h" />
+    <ClInclude Include="SetDlg.h" />
+    <ClInclude Include="ShadeButtonST.h" />
+    <ClInclude Include="Shape.h" />
+    <ClInclude Include="ShowPageDlg.h" />
+    <ClInclude Include="SignAccountsDlg.h" />
+    <ClInclude Include="SplashThread.h" />
+    <ClInclude Include="sqlite3.h" />
+    <ClInclude Include="SqliteDeal.h" />
+    <ClInclude Include="StarSharesclient.h" />
+    <ClInclude Include="StarSharesclientDlg.h" />
+    <ClInclude Include="StartProgress.h" />
+    <ClInclude Include="StaticPic.h" />
+    <ClInclude Include="StaticTrans.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="Subclass.h" />
+    <ClInclude Include="SynchronousSocket.h" />
+    <ClInclude Include="targetver.h" />
+    <ClInclude Include="tinyformat.h" />
+    <ClInclude Include="ToolBarDlg.h" />
+    <ClInclude Include="TXDetailDlg.h" />
+    <ClInclude Include="uiapi.h" />
+    <ClInclude Include="UiHead.h" />
+    <ClInclude Include="VEdit.h" />
+    <ClInclude Include="WalletPassPhrase.h" />
+    <ClInclude Include="WDZCDlg.h" />
+    <ClInclude Include="XProgressCtrl.h" />
+    <ClInclude Include="YComBox.h" />
+    <ClInclude Include="YYYEDlg.h" />
+    <ClInclude Include="ZCInDlg.h" />
+    <ClInclude Include="ZCOutDlg.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="AddrBook.cpp" />
+    <ClCompile Include="AppsDlg.cpp" />
+    <ClCompile Include="AutoComplete.cpp" />
+    <ClCompile Include="BalloonTip.cpp" />
+    <ClCompile Include="BaseDlg.cpp" />
+    <ClCompile Include="BmpBtn.cpp" />
+    <ClCompile Include="BtnST.cpp" />
+    <ClCompile Include="ButtonEx.cpp" />
+    <ClCompile Include="CeXDib.cpp" />
+    <ClCompile Include="ChangPassWord.cpp" />
+    <ClCompile Include="circleprogressctl.cpp" />
+    <ClCompile Include="CJFlatComboBox.cpp" />
+    <ClCompile Include="ComBoxEx.cpp" />
+    <ClCompile Include="CommonStruct.cpp" />
+    <ClCompile Include="EasyFont.cpp" />
+    <ClCompile Include="EncryptWallet.cpp" />
+    <ClCompile Include="GIFControl.cpp" />
+    <ClCompile Include="HeaderCtrlCl.cpp" />
+    <ClCompile Include="HSocket.cpp" />
+    <ClCompile Include="HyperLink.cpp" />
+    <ClCompile Include="JsonConfigHelp.cpp" />
+    <ClCompile Include="json\json_reader.cpp" />
+    <ClCompile Include="json\json_value.cpp" />
+    <ClCompile Include="json\json_writer.cpp" />
+    <ClCompile Include="ListCtrlCl.cpp" />
+    <ClCompile Include="Log.cpp" />
+    <ClCompile Include="MainDlg.cpp" />
+    <ClCompile Include="MessageBoxEx.cpp" />
+    <ClCompile Include="MyMutex.cpp" />
+    <ClCompile Include="MyQueue.cpp" />
+    <ClCompile Include="NewAddressDlg.cpp" />
+    <ClCompile Include="NewSendAddr.cpp" />
+    <ClCompile Include="NoUiMsgBuffer.cpp" />
+    <ClCompile Include="OutGifDlg.cpp" />
+    <ClCompile Include="PayDlg.cpp" />
+    <ClCompile Include="PostMsg.cpp" />
+    <ClCompile Include="ProgStatusDlg.cpp" />
+    <ClCompile Include="RecvDlg.cpp" />
+    <ClCompile Include="Reminderdlg.cpp" />
+    <ClCompile Include="RGZCDlg.cpp" />
+    <ClCompile Include="RollDlg.cpp" />
+    <ClCompile Include="RoundButton.cpp" />
+    <ClCompile Include="RpcCmd.cpp" />
+    <ClCompile Include="RPCDlg.cpp" />
+    <ClCompile Include="SetDlg.cpp" />
+    <ClCompile Include="ShadeButtonST.cpp" />
+    <ClCompile Include="Shape.cpp" />
+    <ClCompile Include="ShowPageDlg.cpp" />
+    <ClCompile Include="SignAccountsDlg.cpp" />
+    <ClCompile Include="SplashThread.cpp" />
+    <ClCompile Include="SqliteDeal.cpp" />
+    <ClCompile Include="StarSharesclient.cpp" />
+    <ClCompile Include="StarSharesclientDlg.cpp" />
+    <ClCompile Include="StarSharesDB.cpp" />
+    <ClCompile Include="StartProgress.cpp" />
+    <ClCompile Include="StaticPic.cpp" />
+    <ClCompile Include="StaticTrans.cpp" />
+    <ClCompile Include="stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="Subclass.cpp" />
+    <ClCompile Include="SynchronousSocket.cpp" />
+    <ClCompile Include="ToolBarDlg.cpp" />
+    <ClCompile Include="TXDetailDlg.cpp" />
+    <ClCompile Include="uiapi.cpp" />
+    <ClCompile Include="UiHead.cpp" />
+    <ClCompile Include="VEdit.cpp" />
+    <ClCompile Include="WalletPassPhrase.cpp" />
+    <ClCompile Include="WDZCDlg.cpp" />
+    <ClCompile Include="XProgressCtrl.cpp" />
+    <ClCompile Include="YComBox.cpp" />
+    <ClCompile Include="YYYEDlg.cpp" />
+    <ClCompile Include="ZCInDlg.cpp" />
+    <ClCompile Include="ZCOutDlg.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="StarSharesclient.rc" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties RESOURCE_FILE="StarSharesclient.rc" />
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>
