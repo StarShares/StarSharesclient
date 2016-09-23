@@ -21,6 +21,9 @@
 
 IMPLEMENT_DYNAMIC(CWDZCDlg, CDialogEx)
 
+int CWDZCDlg::m_coulum = 0;
+int CWDZCDlg::m_index = 0;
+
 CWDZCDlg::CWDZCDlg(CWnd* pParent /*=NULL*/)
 	: CDialogEx(CWDZCDlg::IDD, pParent)
 {
@@ -55,6 +58,7 @@ BEGIN_MESSAGE_MAP(CWDZCDlg, CDialogEx)
 	ON_BN_CLICKED(IDC_BUT_EXECL_EXPORT, &CWDZCDlg::OnBnClickedButExeclExport)
 	ON_BN_CLICKED(IDC_BTN_SEARCH, &CWDZCDlg::OnBnClickedBtnSearch)
 	ON_CBN_SELCHANGE(IDC_COMBO_ASSETLIST, &CWDZCDlg::OnCbnSelchangeComboAssetlist)
+	ON_WM_TIMER()
 END_MESSAGE_MAP()
 
 
@@ -120,7 +124,7 @@ BOOL CWDZCDlg::OnInitDialog()
 		{"序号" ,      100},
 		{"资产名称" ,      150}, 
 		{"发行方" ,  150},
-		{"人气星数量", 150},
+		{"红人秀数量", 150},
 		{"解冻高度",90},
 		{"转出", 63}
 	};
@@ -128,7 +132,7 @@ BOOL CWDZCDlg::OnInitDialog()
 	m_lstWDZC.SetRowHeigt(30);               
 	m_lstWDZC.SetHeaderHeight(1.5);         
 	m_lstWDZC.SetHeaderFontHW(15,0);
-	m_lstWDZC.SetHeaderBKColor(/*224,65,18,*/ 87, 101, 112, 0); 
+	m_lstWDZC.SetHeaderBKColor(87, 101, 112, 0); 
 	m_lstWDZC.SetHeaderTextColor(RGB(255,255,255)); 
 	m_lstWDZC.SetTextColor(RGB(0,0,0));  
 	for( int i = 0 ; i <6 ; i++  ) {
@@ -156,14 +160,6 @@ BOOL CWDZCDlg::OnInitDialog()
 	m_sBtnExportExcel.SetColor(CButtonST::BTNST_COLOR_FG_FOCUS, RGB(255,255,255));
 	m_sBtnExportExcel.SetColor(CButtonST::BTNST_COLOR_BK_IN, RGB(255,255,255));
 	m_sBtnExportExcel.SizeToContent();
-
-
-	/*m_lstWDZC.InsertItem(0, "hello");
-	m_lstWDZC.SetItemText(0, 1, "hello");
-	m_lstWDZC.SetItemText(0, 2, "hello");
-	m_lstWDZC.SetItemText(0, 3, "hello");
-	m_lstWDZC.CreateItemButton(0, 5, this->GetSafeHwnd(), "资产转出");*/
-
 	
 	m_sbtnSearch.SetBitmaps( IDB_BITMAP_BUT2 , RGB(255, 255, 0) , IDB_BITMAP_BUT1 , RGB(255, 255, 0) );
 	m_sbtnSearch.SetAlign(CButtonST::ST_ALIGN_OVERLAP);
@@ -177,33 +173,18 @@ BOOL CWDZCDlg::OnInitDialog()
 
 	m_ycomboAsset.GetWindowRect(&rect);
 	ScreenToClient(&rect);
-	//m_ycomboAsset.MoveWindow(30 , 45 , 128, rect.Height());	
-	m_ycomboAsset.SetEdtNewFont(120);
-	m_ycomboAsset.SetListNewFont(120);
+	m_ycomboAsset.SetEdtNewFont(100);
+	m_ycomboAsset.SetListNewFont(100);
 	m_ycomboAsset.SetEdtTextColor(RGB(121, 122, 122));
 	m_ycomboAsset.SetListTextColor(RGB(118, 192, 50));
-	//m_time.SetItemHeight(-1, 180); // 不用此函数设编辑框高度，让它根据字体自动调整
-	m_ycomboAsset.SetItemHeight(1, 35);
+	m_ycomboAsset.SetItemHeight(1, 30);
 	m_ycomboAsset.AotuAdjustDroppedWidth();
 	m_ycomboAsset.SetEdtFrameColor(RGB(238,238,238));
 	m_ycomboAsset.SetFrameStyle(CYComBox::ONLYONE);
 
 	InitCombox();
-	//m_ycomboAsset.SetCurSel(0);
-	//int sel =m_ycomboAsset.GetCurSel();
-	//if (sel != -1)
-	//{
-	//	CString curText =_T("");
-	//	m_ycomboAsset.GetLBText(sel,curText);
-	//	string appname =strprintf("%s",curText);
-	//	//m_appid = GetAppID(appname);
-	//}
 
-	/*m_lstWDZC.InsertItem(1, "hello");
-	m_lstWDZC.SetItemText(1, 1, "hello");
-	m_lstWDZC.SetItemText(1, 2, "hello");
-	m_lstWDZC.SetItemText(1, 3, "hello");
-	m_lstWDZC.CreateItemButton(1, 4, this->GetSafeHwnd(), "资产转出");*/
+	SetTimer(0x10, 30000, NULL);
 
 	return TRUE;  // return TRUE unless you set the focus to a control
 	// 异常: OCX 属性页应返回 FALSE
@@ -316,7 +297,6 @@ void CWDZCDlg::OnBnClickedBtnZcIn()
 void CWDZCDlg::OnBnClickedButExeclExport()
 {
 	// TODO: 在此添加控件通知处理程序代码
-
 	int count = m_lstWDZC.GetItemCount();
 	if (count == 0)
 	{
@@ -336,13 +316,14 @@ void CWDZCDlg::OnBnClickedButExeclExport()
 	}
 
 	struct LISTCol {
-		CString		name ;
+		string		name ;
 		UINT		size ;
-	} listcol[4]  = {
-		{"序号" ,      60},
-		{"资产名称" ,      40}, 
-		{"发行方" ,  50},
-		{"人气星数量", 20},
+	} listheadr[5]  = {
+		{_T("序号") ,      50},
+		{_T("资产名称") ,    30},
+		{_T("发行方") ,    40},
+		{_T("红人秀数量") ,    10},
+		{_T("解冻高度") ,  40}
 	};
 
 	COleVariant
@@ -367,18 +348,11 @@ void CWDZCDlg::OnBnClickedButExeclExport()
 
 	CFont0   font;
 
-
-
 	if (!app.CreateDispatch(_T("Excel.Application")))
-
 	{
-
 		UiFun::MessageBoxEx(_T("可能是没有装office 导致创建失败！") , _T("提示") ,MFB_OK|MFB_TIP );
 		return;
-
 	}
-
-
 
 	//Get   a   new   workbook.
 
@@ -386,16 +360,13 @@ void CWDZCDlg::OnBnClickedButExeclExport()
 
 	book = books.Add(covOptional);
 
-
-
 	sheets = book.get_Worksheets();
 
 	sheet = sheets.get_Item(COleVariant((short)1));
 
-
 	int   iCol;
 
-	int   m_cols   =   4;
+	int   m_cols   =   5;
 
 	int   m_rows = count;
 
@@ -404,8 +375,6 @@ void CWDZCDlg::OnBnClickedButExeclExport()
 	TCHAR     lpBuffer[256];
 
 	bool       fFound   =   false;
-
-
 
 	hdi.mask   =   HDI_TEXT;
 
@@ -418,18 +387,16 @@ void CWDZCDlg::OnBnClickedButExeclExport()
 	CString strTemp;
 
 	for(iCol=0;   iCol <m_cols;   iCol++)//将列表的标题头写入EXCEL
-
 	{
-
 		UiFun::GetCellName(1 ,iCol + 1, colname);
 
 		range   =   sheet.get_Range(COleVariant(colname),COleVariant(colname));
 
 		//pmyHeaderCtrl-> GetItem(iCol,   &hdi);
 
-		range.put_Value2(COleVariant(listcol[iCol].name));
+		range.put_Value2(COleVariant(listheadr[iCol].name.c_str()));
 
-		int   nWidth   = listcol[iCol].size;  //m_listCtrl.GetColumnWidth(iCol)/6;
+		int   nWidth   = listheadr[iCol].size;  //m_listCtrl.GetColumnWidth(iCol)/6;
 
 		//得到第iCol+1列  
 
@@ -501,6 +468,12 @@ void CWDZCDlg::OnBnClickedButExeclExport()
 		index[1] = 3;
 		saRet.PutElement(index,bstr);
 
+		SysFreeString(bstr);
+		CString strMoney = m_lstWDZC.GetItemText(i, 4);
+		bstr   =   strMoney.AllocSysString();
+		index[0] = i;
+		index[1] = 4;
+		saRet.PutElement(index,bstr);
 
 		SysFreeString(bstr);
 	}
@@ -535,23 +508,32 @@ void CWDZCDlg::OnBnClickedButExeclExport()
 
 	app.ReleaseDispatch();
 
-
 }
 
 void CWDZCDlg::InitCombox()
 {
+	m_MapMyAssetList.clear();
+	while(m_ycomboAsset.GetCount() != 0)
+	{
+		m_ycomboAsset.DeleteString(0);
+	}
+
 	string strCondition = "Status = 5 and Result = 1";
 	theApp.m_SqliteDeal.GetAssetList(strCondition, (&m_MapMyAssetList));
 	map<string,LISTASSET_t>::iterator it= m_MapMyAssetList.begin();
+
+	m_ycomboAsset.InsertString(0, _T("全部"));
+
+	int i = 1;
 	for(;it != m_MapMyAssetList.end();it++)
 	{
 		LISTASSET_t data=it->second;
 		CString temp;
 		temp.Format(_T("%s"),data.AssetName.c_str());	
+		m_ycomboAsset.InsertString(i, temp);
 
-		m_ycomboAsset.AddString(temp);
+		i++;
 	}
-
 }
 
 
@@ -560,6 +542,9 @@ void CWDZCDlg::OnBnClickedBtnSearch()
 	// TODO: 在此添加控件通知处理程序代码
 	m_lstWDZC.DeleteAllItems();
 	m_lstWDZC.release();
+
+	m_coulum = 0;
+	m_index = 0;
 
 	CString strAssetName;
 	GetDlgItem(IDC_COMBO_ASSETLIST)->GetWindowText(strAssetName);
@@ -571,6 +556,18 @@ void CWDZCDlg::OnBnClickedBtnSearch()
 
 	map<string,LISTASSET_t>::const_iterator const_it;
 
+	if(0 == strcmp(strAssetName, _T("全部")))
+	{
+		for(const_it = m_MapMyAssetList.begin(); const_it != m_MapMyAssetList.end(); const_it++)
+		{
+			m_appid = const_it->first.c_str();
+
+			OnShowListCtrol(m_appid);
+		}
+
+		return;
+	}
+	
 	for(const_it = m_MapMyAssetList.begin(); const_it != m_MapMyAssetList.end(); const_it++)
 	{
 		if(0 == strcmp(const_it->second.AssetName.c_str(), strAssetName))
@@ -593,7 +590,7 @@ void CWDZCDlg::OnShowListCtrol(string appId)
 	strCommand = strprintf("%s %s", "getassets", m_MapMyAssetList[m_appid].AssetID);
 	if(!CSoyPayHelp::getInstance()->SendRpc(strCommand,strShowData))
 	{
-		TRACE("OnBnClickedSendtrnsfer rpccmd sendtoaddress error");
+		TRACE("getassets rpccmd error\r\n");
 		return;
 	}
 	if (!reader.parse(strShowData, root)) 
@@ -606,7 +603,7 @@ void CWDZCDlg::OnShowListCtrol(string appId)
 
 	if(0 == valuearray.size())
 	{
-		UiFun::MessageBoxEx(_T("该资产账户为0"),_T("提示") ,MFB_OK|MFB_TIP );
+		//UiFun::MessageBoxEx(_T("该资产账户为0"),_T("提示") ,MFB_OK|MFB_TIP );
 		return;
 	}
 
@@ -619,27 +616,26 @@ void CWDZCDlg::OnShowListCtrol(string appId)
 	}
 
 	double money = 0.0;
-	int coulum = 0;
-	int index = 0;
+	
 	if (dFreeMoney != 0)
 	{
 		money = (dFreeMoney*1.0/COIN);
 		
 		string strOrder ="";
 		int nSubIdx = 0;
-		strOrder= strprintf("%d", 1);
-		m_lstWDZC.InsertItem(coulum,strOrder.c_str());
+		strOrder= strprintf("%d", m_coulum + 1);
+		m_lstWDZC.InsertItem(m_coulum,strOrder.c_str());
 
-		m_lstWDZC.SetItemText(coulum, 1, m_MapMyAssetList[m_appid].AssetName.c_str());
-		m_lstWDZC.SetItemText(coulum, 2, m_MapMyAssetList[m_appid].AssetIssuer.c_str());
+		m_lstWDZC.SetItemText(m_coulum, 1, m_MapMyAssetList[m_appid].AssetName.c_str());
+		m_lstWDZC.SetItemText(m_coulum, 2, m_MapMyAssetList[m_appid].AssetIssuer.c_str());
 		strShowData = strprintf("%.8f",money);
-		m_lstWDZC.SetItemText( coulum , 3, strShowData.c_str()) ;
+		m_lstWDZC.SetItemText( m_coulum , 3, strShowData.c_str()) ;
 		strOrder= "0";
-		m_lstWDZC.SetItemText(coulum ,4 , strOrder.c_str() ) ;
+		m_lstWDZC.SetItemText(m_coulum ,4 , strOrder.c_str() ) ;
 
-		m_lstWDZC.CreateItemButton(0, 5, this->GetSafeHwnd(), "资产转出");
-		coulum = 1;
-		index =1;
+		m_lstWDZC.CreateItemButton(m_coulum, 5, this->GetSafeHwnd(), "资产转出");
+		m_coulum++;
+		m_index++;
 	}
 
 	for(int i = 0; i < valuearray.size(); i++)
@@ -659,26 +655,25 @@ void CWDZCDlg::OnShowListCtrol(string appId)
 			{
 				int nSubIdx = 0;
 				string strOrder ="";
-				strOrder= strprintf("%d", index+1);
-				m_lstWDZC.InsertItem(coulum,strOrder.c_str());
+				strOrder= strprintf("%d", m_index+1);
+				m_lstWDZC.InsertItem(m_coulum,strOrder.c_str());
 
-				m_lstWDZC.SetItemText(coulum, 1, m_MapMyAssetList[m_appid].AssetName.c_str());
-				m_lstWDZC.SetItemText(coulum, 2, m_MapMyAssetList[m_appid].AssetIssuer.c_str());
+				m_lstWDZC.SetItemText(m_coulum, 1, m_MapMyAssetList[m_appid].AssetName.c_str());
+				m_lstWDZC.SetItemText(m_coulum, 2, m_MapMyAssetList[m_appid].AssetIssuer.c_str());
 
 				FreezedFund = valuearray[i]["value"].asInt64() ;
 				money = (FreezedFund*1.0/COIN);
 				strShowData = strprintf("%.8f",money);
-				m_lstWDZC.SetItemText( coulum , 3, strShowData.c_str()) ;
+				m_lstWDZC.SetItemText( m_coulum , 3, strShowData.c_str()) ;
 
 				strShowData =strprintf("%d" , valuearray[i]["nHeight"].asInt()) ;
-				m_lstWDZC.SetItemText(coulum , 4 , strShowData.c_str() ) ;
-				m_lstWDZC.SetItemText(coulum, 5, "无法转出");
-				//m_lstWDZC.CreateItemButton(index, 5, this->GetSafeHwnd(), "无法转出");
-				coulum++;
-				index++;
+				m_lstWDZC.SetItemText(m_coulum , 4 , strShowData.c_str() ) ;
+				m_lstWDZC.SetItemText(m_coulum, 5, "无法转出");
+
+				m_coulum++;
+				m_index++;
 			}
 		}
-		
 	}
 }
 
@@ -694,4 +689,23 @@ void CWDZCDlg::OnCbnSelchangeComboAssetlist()
 		string appname =strprintf("%s",curText);
 		//m_appid = GetAppID(appname);
 	}
+}
+
+
+void CWDZCDlg::OnTimer(UINT_PTR nIDEvent)
+{
+	// TODO: 在此添加消息处理程序代码和/或调用默认值
+	switch(nIDEvent)
+	{
+	case 0x10:
+		{
+			InitCombox();
+			break;
+		}
+	default:
+		break;
+	}
+	
+
+	CDialogEx::OnTimer(nIDEvent);
 }

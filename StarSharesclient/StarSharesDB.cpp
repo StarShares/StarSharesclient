@@ -346,7 +346,6 @@ void CStarSharesclientApp::UpdateAddressData(){
 				listaddr.Label=addrsql.Label;
 				string Temp = listaddr.ToJson();
 				SendUIMessage((int)WM_UP_ADDRESS,Temp);
-
 			}
 		}
 	}
@@ -379,7 +378,6 @@ void CStarSharesclientApp::UpdateTransaction(string hash){
 	Postmsg.SetData(temp.c_str());	
 	m_msgUITxDetailDlgQueue.push(Postmsg);
 	DispatchMsg( theApp.GetMtHthrdId() , MSG_USER_TRANSRECORD_UI ,WM_REMOVETX,0);
-
 
 	PopupCommBalloonTip(hash);
 }

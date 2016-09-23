@@ -51,9 +51,12 @@ public:
 	string m_appid;
 	string GetAppID(string AppName);
 
-	//map<unsigned int,LISTASSET_t> m_MapAssetList;			//索引对应资产ID列表
 	afx_msg void OnCbnSelchangeComboAssetlist();
 
 public:
 	map<string,LISTASSET_t> m_MapMyAssetList;			//索引对应已发行资产ID列表
+
+	static int m_coulum;
+	static int m_index;
+	afx_msg void OnTimer(UINT_PTR nIDEvent);
 };

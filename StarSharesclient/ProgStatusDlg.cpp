@@ -160,7 +160,6 @@ void CProgStatusDlg::OnSize(UINT nType, int cx, int cy)
 	{
 		pst->GetWindowRect(rect);
 		pst->SetWindowPos( NULL ,Width + 20, 13, rect.Width(), rect.Height()  ,SWP_SHOWWINDOW ) ; 
-		//Width += rect.Width();
 	}
 	pst = GetDlgItem(IDC_PROGRESS);
 	if( NULL != pst)
@@ -184,7 +183,7 @@ void CProgStatusDlg::OnSize(UINT nType, int cx, int cy)
 	{
 		m_vlinkCtrlQQ.GetWindowRect(rect);
 		nQQWidth = rect.Width();
-		m_vlinkCtrlQQ.SetWindowPos( NULL ,900 - 80 - nVerWidth - nQQWidth - 20, 13, rect.Width(), rect.Height()  ,SWP_SHOWWINDOW ) ; 
+		m_vlinkCtrlQQ.SetWindowPos( NULL ,900 - 80 - nVerWidth - nQQWidth - 10, 13, rect.Width(), rect.Height()  ,SWP_SHOWWINDOW ) ; 
 	}
 	
 	int nblockWidth = 0;
@@ -192,7 +191,7 @@ void CProgStatusDlg::OnSize(UINT nType, int cx, int cy)
 	{
 		m_vlinkCtrlBlock.GetWindowRect(rect);
 		nblockWidth = rect.Width();
-		m_vlinkCtrlBlock.SetWindowPos( NULL ,900 - 80 - nVerWidth - nQQWidth - nblockWidth - 50 , 13, rect.Width(), rect.Height()  ,SWP_SHOWWINDOW ) ; 
+		m_vlinkCtrlBlock.SetWindowPos( NULL ,900 - 80 - nVerWidth - nQQWidth - nblockWidth - 25 , 13, rect.Width(), rect.Height()  ,SWP_SHOWWINDOW ) ; 
 	}
 
 }
@@ -207,17 +206,16 @@ BOOL CProgStatusDlg::Create(CWnd* pParentWnd, UINT nIDTemplate, UINT nStyle, UIN
 		UpdateData(0);
 
 		HCURSOR cur = ::LoadCursor(NULL, IDC_HAND);
-		m_vlinkCtrlQQ.SetWindowText("官方客服QQ");
+		m_vlinkCtrlQQ.SetWindowText("QQ群号546511845");
 		m_vlinkCtrlQQ.SetColors(RGB(255,255,255), RGB(255,255,255));
-		//m_vlinkCtrlQQ.SetFont(90 , _T("微软雅黑"));
 		m_vlinkCtrlQQ.SetUnderline(FALSE);
-		m_vlinkCtrlQQ.SetURL("http://starshare.com.cn/");
+		m_vlinkCtrlQQ.SetURL("http://www.starshares.org/");
 		m_vlinkCtrlQQ.SetCursor(cur);
 
 		m_vlinkCtrlBlock.SetWindowText("Block chain");
 		m_vlinkCtrlBlock.SetColors(RGB(255,255,255), RGB(255,255,255));
 		m_vlinkCtrlBlock.SetUnderline(FALSE);
-		m_vlinkCtrlBlock.SetURL(" http://starshare.com.cn/");
+		m_vlinkCtrlBlock.SetURL("http://www.starshares.org/");
 		m_vlinkCtrlBlock.SetCursor(cur);
 
 		m_strNeting.SetFont(90 , _T("微软雅黑"));				//设置显示字体和大小
@@ -248,7 +246,6 @@ BOOL CProgStatusDlg::Create(CWnd* pParentWnd, UINT nIDTemplate, UINT nStyle, UIN
 
 		string ver = strprintf("版本：v%s RC", GetUIVersion());
 		m_strVersion.SetWindowText(ver.c_str()) ;
-		//m_strVersion.SetWindowText(_T("版本:v1.0.2.0 RC")) ;
 
 		if ( NULL == m_ProgressWnd ) {
 			m_ProgressWnd = new CGIFControl ;
@@ -265,18 +262,12 @@ BOOL CProgStatusDlg::Create(CWnd* pParentWnd, UINT nIDTemplate, UINT nStyle, UIN
 		m_LockBmpArray[1].LoadBitmap(IDB_BITMAP_UNLOCK); 
 
 		theApp.SubscribeMsg( theApp.GetMtHthrdId() , GetSafeHwnd() , MSG_USER_UP_PROGRESS ) ;
-
-		//m_progress.SendMessage(PBM_SETBKCOLOR, 0, RGB(66, 65, 63));//背景色
-		//m_progress.SendMessage(PBM_SETBARCOLOR, 0, RGB(254, 153, 0));//前景色
 		
 		m_progress.SetTextColor(RGB(0, 0, 0));
 		m_progress.SetBarBkColor(RGB(255, 255, 255));
 		m_progress.SetBarColor(RGB(252, 215, 127));
 
 		LoadGifing(TRUE);
-
-		//CPostMsg postmsg(MSG_USER_UP_PROGRESS,0);
-		//theApp.m_MsgQueue.pushFront(postmsg);
 	}
 	return bRes ;
 }
@@ -460,7 +451,6 @@ void CProgStatusDlg::ShowNetCount()
 }
 LRESULT CProgStatusDlg::OnShowProgressCtrl( WPARAM wParam, LPARAM lParam ) 
 {
-//	TRACE("OnShowProgressCtrl:%s\r\n","OnShowProgressCtrl");
 	if (wParam == WM_LOCKSTATE)
 	{
 		ShowLockCtrl();

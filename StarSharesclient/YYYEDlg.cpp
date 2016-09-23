@@ -122,21 +122,14 @@ BOOL CYYYEDlg::OnInitDialog()
 	CRect rect;
 	m_combApp.GetWindowRect(&rect);
 	ScreenToClient(&rect);
-	//m_time.MoveWindow(30 , 45 , 128, rect.Height());	
-	m_combApp.SetEdtNewFont(120);
-	m_combApp.SetListNewFont(120);
+	m_combApp.SetEdtNewFont(100);
+	m_combApp.SetListNewFont(100);
 	m_combApp.SetEdtTextColor(RGB(121, 122, 122));
 	m_combApp.SetListTextColor(RGB(118, 192, 50));
-	//m_time.SetItemHeight(-1, 180); // 不用此函数设编辑框高度，让它根据字体自动调整
-	//m_time.SetItemHeight(1, 35);
+	m_combApp.SetItemHeight(1, 30);
 	m_combApp.AotuAdjustDroppedWidth();
 	m_combApp.SetEdtFrameColor(RGB(238,238,238));
 	m_combApp.SetFrameStyle(CYComBox::ONLYONE);
-
-	//m_time.SetNewFont(100);
-	//m_time.SetTextColor(RGB(121, 122, 122));
-	//m_time.SetBkColor(RGB(246, 248, 249));
-
 
 	InitCombox();
 	m_combApp.SetCurSel(0);

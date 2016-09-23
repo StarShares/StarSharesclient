@@ -47,7 +47,7 @@ public:
 
 	afx_msg BOOL OnEraseBkgnd(CDC* pDC);
 	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
-	// //支持的人气星数量
+	// //支持的红人星数量
 	//CVEdit m_editSupport;
 	// //确认支付
 	CShadeButtonST m_rBtnConfirmed;

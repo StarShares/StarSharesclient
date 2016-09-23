@@ -69,13 +69,7 @@ BOOL CEncryptWallet::OnInitDialog()
 	m_rBtnOk.SetBitmaps( IDB_BITMAP_TC_BUT1 , RGB(255, 255, 0) , IDB_BITMAP_TC_BUT2 , RGB(255, 255, 255) );
 	m_rBtnOk.SetAlign(CButtonST::ST_ALIGN_OVERLAP);
 	m_rBtnOk.SetWindowText(_T("È·ÈÏ")) ;
-//	m_rBtnOk.SetFontEx(20 , _T("Î¢ÈíÑÅºÚ"));
-	/*
-	m_rBtnOk.SetColor(CButtonST::BTNST_COLOR_FG_OUT , RGB(0, 0, 0));
-	m_rBtnOk.SetColor(CButtonST::BTNST_COLOR_FG_IN , RGB(200, 75, 60));
-	m_rBtnOk.SetColor(CButtonST::BTNST_COLOR_FG_FOCUS, RGB(0, 0, 0));
-	m_rBtnOk.SetColor(CButtonST::BTNST_COLOR_BK_IN, RGB(0, 0, 0));
-	*/
+
 	m_rBtnOk.SetColor(CButtonST::BTNST_COLOR_FG_OUT , RGB(255, 255, 255));
 	m_rBtnOk.SetColor(CButtonST::BTNST_COLOR_FG_IN , RGB(200, 75, 60));
 	m_rBtnOk.SetColor(CButtonST::BTNST_COLOR_FG_FOCUS, RGB(255, 255, 255));
@@ -85,13 +79,7 @@ BOOL CEncryptWallet::OnInitDialog()
 	m_rBtnCancel.SetBitmaps( IDB_BITMAP_TC_BUT1 , RGB(255, 255, 0) , IDB_BITMAP_TC_BUT2 , RGB(255, 255, 255) );
 	m_rBtnCancel.SetAlign(CButtonST::ST_ALIGN_OVERLAP);
 	m_rBtnCancel.SetWindowText(_T("È¡Ïû")) ;
-	//m_rBtnCancel.SetFontEx(20 , _T("Î¢ÈíÑÅºÚ"));
-	/*
-	m_rBtnCancel.SetColor(CButtonST::BTNST_COLOR_FG_OUT , RGB(0, 0, 0));
-	m_rBtnCancel.SetColor(CButtonST::BTNST_COLOR_FG_IN , RGB(200, 75, 60));
-	m_rBtnCancel.SetColor(CButtonST::BTNST_COLOR_FG_FOCUS, RGB(0, 0, 0));
-	m_rBtnCancel.SetColor(CButtonST::BTNST_COLOR_BK_IN, RGB(0, 0, 0));
-	*/
+	
 	m_rBtnCancel.SetColor(CButtonST::BTNST_COLOR_FG_OUT , RGB(255, 255, 255));
 	m_rBtnCancel.SetColor(CButtonST::BTNST_COLOR_FG_IN , RGB(200, 75, 60));
 	m_rBtnCancel.SetColor(CButtonST::BTNST_COLOR_FG_FOCUS, RGB(255, 255, 255));
@@ -166,7 +154,7 @@ void CEncryptWallet::OnBnClickedOk()
 	}
 
 	CBaseDlg::OnOK();
-	if (isClose)
+	if(isClose)
 	{
 		((CStarSharesclientDlg*)(theApp.m_pMainWnd))->ClosWalletWind();
 	}

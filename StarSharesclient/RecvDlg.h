@@ -42,5 +42,8 @@ public:
 	afx_msg LRESULT OnShowListCtrl(  WPARAM wParam, LPARAM lParam ) ;
 	virtual BOOL PreTranslateMessage(MSG* pMsg);
 	afx_msg void OnBnClickedExportExel2();
+
+	void OnColumnclickAddrlist(NMHDR* pNMHDR, LRESULT* pResult) ;
+	static int CALLBACK FileListCompareFunction(LPARAM lParam1,LPARAM lParam2,LPARAM lParamSort);
 };
 

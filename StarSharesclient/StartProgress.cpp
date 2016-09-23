@@ -57,19 +57,11 @@ BOOL CStartProgress::OnInitDialog()
 	if ( NULL == m_ProgressWnd ) {
 		m_ProgressWnd = new CGIFControl ;
 		m_ProgressWnd->Create(_T("") , WS_CHILD | SS_OWNERDRAW | WS_VISIBLE | SS_NOTIFY , CRect(0,0,48,34) , this, 121 ) ;
-		//m_ProgressWnd->SetWindowPos(NULL , x/2 - 175 + 250 , y/2+20 , 0 ,0 , SWP_NOSIZE) ;
 	}
 
 	m_ProgressBmp[0].LoadBitmap(IDB_BITMAP_PROG1);  
-	//m_ProgressBmp[1].LoadBitmap(IDB_BITMAP_PROG2);  
-	//m_ProgressBmp[2].LoadBitmap(IDB_BITMAP_PROG3);  
-	//m_ProgressBmp[3].LoadBitmap(IDB_BITMAP_PROG4); 
-
-	//m_progress.SendMessage(PBM_SETBKCOLOR, 0, RGB(66, 65, 63));//±³¾°É«
-	//m_progress.SendMessage(PBM_SETBARCOLOR, 0, RGB(254, 153, 0));//Ç°¾°É«
 
 	m_progress.SetBarBkColor(RGB(255,255,255));
-	//m_progress.SetBarColor(RGB(255, 0, 0));
 	m_progress.SetBarColor(RGB(242, 201, 219));
 
 	m_progress.SetRange(0,4);

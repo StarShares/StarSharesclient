@@ -13,6 +13,7 @@
 #include "CWorksheet.h"
 #include "CWorkbooks.h"
 #include "CWorksheets.h"
+#include "ShowSingleTxDlg.h"
 
 
 // CTXDetailDlg
@@ -51,7 +52,7 @@ BEGIN_MESSAGE_MAP(CTXDetailDlg, CDialogBar)
 	ON_WM_SIZE()
 	ON_CBN_SELCHANGE(IDC_COMBO_TIME, &CTXDetailDlg::OnCbnSelchangeComboTime)
 	ON_CBN_SELCHANGE(IDC_COMBO_TYPE, &CTXDetailDlg::OnCbnSelchangeCombo1)
-	ON_NOTIFY(NM_DBLCLK, IDC_LIST, &CTXDetailDlg::OnNMDblclkList)
+	ON_NOTIFY(NM_DBLCLK, IDC_LIST_TXDETAIL, &CTXDetailDlg::OnNMDblclkList)
 	ON_MESSAGE(MSG_USER_TRANSRECORD_UI , &CTXDetailDlg::OnShowListCtrl )
 	ON_WM_CTLCOLOR()
 	ON_BN_CLICKED(IDC_BUTTON_SEARCH, &CTXDetailDlg::OnBnClickedButtonSearch)
@@ -544,10 +545,6 @@ BOOL CTXDetailDlg::Create(CWnd* pParentWnd, UINT nIDTemplate, UINT nStyle, UINT 
 		m_condition.InsertString(3,_T("挖矿所得"));
 		m_condition.InsertString(4,_T("合约"));
 		m_condition.InsertString(5,_T("激活"));
-		//m_condition.AddString(_T("全部"));
-		//m_condition.AddString(_T("接收"));
-		//m_condition.AddString(_T("发送"));
-		//m_condition.AddString(_T("挖矿所得"));
 
 		m_time.InsertString(0,_T("全部"));
 		m_time.InsertString(1,_T("今天"));
@@ -560,13 +557,10 @@ BOOL CTXDetailDlg::Create(CWnd* pParentWnd, UINT nIDTemplate, UINT nStyle, UINT 
 		CRect rect;
 		m_time.GetWindowRect(&rect);
 		ScreenToClient(&rect);
-		//m_time.MoveWindow(30 , 45 , 128, rect.Height());	
 		m_time.SetEdtNewFont(120);
 		m_time.SetListNewFont(120);
 		m_time.SetEdtTextColor(RGB(121, 122, 122));
 		m_time.SetListTextColor(RGB(118, 192, 50));
-		//m_time.SetItemHeight(-1, 180); // 不用此函数设编辑框高度，让它根据字体自动调整
-		//m_time.SetItemHeight(1, 35);
 		m_time.AotuAdjustDroppedWidth();
 		m_time.SetEdtFrameColor(RGB(238,238,238));
 		m_time.SetFrameStyle(CYComBox::ONLYONE);
@@ -588,7 +582,7 @@ BOOL CTXDetailDlg::Create(CWnd* pParentWnd, UINT nIDTemplate, UINT nStyle, UINT 
 		m_colorEditText = RGB(159,161,164);
 
 		m_editAddr.SetWindowText(_T("请输入地址进行搜索"));
-		m_editAddr.SetNewFont(120);
+		m_editAddr.SetNewFont(100);
 		
 		OninitializeList();
 
@@ -684,7 +678,6 @@ BOOL CTXDetailDlg::PreTranslateMessage(MSG* pMsg)
 
 		case VK_ESCAPE: //ESC  
 			return TRUE;  
-
 		}  
 
 	}  
@@ -713,6 +706,9 @@ void CTXDetailDlg::OnNMDblclkList(NMHDR *pNMHDR, LRESULT *pResult)
 		{		
 			theApp.m_strAddress =_T("");
 		}
+
+		CShowSingleTxDlg dlg;
+		dlg.DoModal();
 	}  
 	*pResult = 0;
 }

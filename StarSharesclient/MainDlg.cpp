@@ -113,15 +113,7 @@ void CMainDlg::InitializeLinkCtrl()
 	m_vlinkCtrl3.SetWindowText(_T(""));
 	m_vlinkCtrl3.EnableWindow(FALSE);
 	m_vlinkCtrl4.SetWindowText(_T(""));
-	m_vlinkCtrl4.EnableWindow(FALSE); 
-
-
-	/*m_vlinkCtrlQQ->SetWindowText("官方客服QQ");
-	m_vlinkCtrlQQ->SetURL("http://wpa.qq.com/msgrd?v=3&uin=1578215488&site=qq&menu=yes");
-
-	m_vlinkCtrlBlock->SetWindowText("Block chain");
-	m_vlinkCtrlBlock->SetURL("http://block.dacrs.com/index");*/
-	
+	m_vlinkCtrl4.EnableWindow(FALSE); 	
 
 	HCURSOR cur = ::LoadCursor(NULL, IDC_HAND);
 
@@ -284,7 +276,7 @@ void CMainDlg::SetCtrlText()
 bool CMainDlg::GetUrlServer()
 {
 	m_mapUrl.clear();
-	CString url(_T("http://120.24.244.89/UpData/forumupdata.json"));    
+	CString url(_T("http://47.90.49.128/UpData/forumupdata.json"));    
 	CInternetSession session;
 
 
@@ -582,12 +574,12 @@ BOOL CMainDlg::Create(CWnd* pParentWnd, UINT nIDTemplate, UINT nStyle, UINT nID)
 		GetUrlServer();
 		InitializeLinkCtrl();
 
-		m_strBalance.SetFont(100 , _T("微软雅黑"));
-		m_strConfirming.SetFont(100 , _T("微软雅黑"));
-		m_strTransactionNumber.SetFont(100 , _T("微软雅黑"));
-		m_strBalance.SetTextColor(RGB(238, 39, 39));
-		m_strConfirming.SetTextColor(RGB(238, 39, 39));
-		m_strTransactionNumber.SetTextColor(RGB(238, 39, 39));
+		m_strBalance.SetFont(110 , _T("微软雅黑"));
+		m_strConfirming.SetFont(110 , _T("微软雅黑"));
+		m_strTransactionNumber.SetFont(110 , _T("微软雅黑"));
+		m_strBalance.SetTextColor(RGB(102,102,102));
+		m_strConfirming.SetTextColor(RGB(102,102,102));
+		m_strTransactionNumber.SetTextColor(RGB(102,102,102));
 
 		m_strAmount1.SetFont(90 , _T("微软雅黑"));
 		m_strAmount2.SetFont(90 , _T("微软雅黑"));
@@ -604,20 +596,6 @@ BOOL CMainDlg::Create(CWnd* pParentWnd, UINT nIDTemplate, UINT nStyle, UINT nID)
 		m_strSrcAddr1.SetFont(90 , _T("微软雅黑"));
 		m_strSrcAddr2.SetFont(90 , _T("微软雅黑"));
 		m_strSrcAddr3.SetFont(90 , _T("微软雅黑"));
-		
-
-		//m_strRecentTrade1.SetFont(90, _T("微软雅黑"));
-		//m_strRecentTrade2.SetFont(90, _T("微软雅黑"));
-		//m_strRecentTrade3.SetFont(90, _T("微软雅黑"));
-		//m_strRecentTrade4.SetFont(90, _T("微软雅黑"));
-
-
-	
-
-		//加载指定位图资源 Bmp图片ID
-		//HBITMAP hBitmap; 
-		//hBitmap = ::LoadBitmap(AfxGetInstanceHandle(),MAKEINTRESOURCE(IDB_BITMAP_WALLET_SYNC)); 
-		//m_sysWallet.SetBitmap(hBitmap);
 
 		theApp.SubscribeMsg( theApp.GetMtHthrdId() , GetSafeHwnd() , MSG_USER_MAIN_UI );
 	}
@@ -640,21 +618,21 @@ void CMainDlg::OnSize(UINT nType, int cx, int cy)
 		if ( NULL != pst ) {
 			CRect rect ;
 			pst->GetClientRect( rect );    
-			pst->SetWindowPos( NULL ,(276 - rect.Width())/ 2 + 80 ,(rc.Height()/100)*13 + 5, /*rect.Width()*/rect.Width(), rect.Height()  ,SWP_SHOWWINDOW ) ; 
+			pst->SetWindowPos( NULL ,(276 - rect.Width())/ 2 + 80 ,(rc.Height()/100)*13 , /*rect.Width()*/rect.Width(), rect.Height()  ,SWP_SHOWWINDOW ) ; 
 		}
 		//设置确认余额位置
 		pst = GetDlgItem( IDC_ST_CONFIRMING ) ;
 		if ( NULL != pst ) {
 			CRect rect ;
 			pst->GetClientRect( rect ) ;
-			pst->SetWindowPos( NULL ,/*(rc.Width()/100)*50*/404 + 30 ,(rc.Height()/100)*13 + 5  , /*rect.Width()*/292, rect.Height()  ,SWP_SHOWWINDOW ) ; 
+			pst->SetWindowPos( NULL ,/*(rc.Width()/100)*50*/404 + 30 ,(rc.Height()/100)*13  , /*rect.Width()*/292, rect.Height()  ,SWP_SHOWWINDOW ) ; 
 		}
 		//设置交易数
 		pst = GetDlgItem( IDC_ST_TRANSACTION_NUMBER) ;
 		if ( NULL != pst ) {
 			CRect rect ;
 			pst->GetClientRect( rect ) ;
-			pst->SetWindowPos( NULL ,/*(int)((rc.Width()/100)*88 + 10)*/696 + 30 ,(rc.Height()/100)*13 + 3  , /*rect.Width()*/292, rect.Height()  ,SWP_SHOWWINDOW ) ; 
+			pst->SetWindowPos( NULL ,/*(int)((rc.Width()/100)*88 + 10)*/696 + 30 ,(rc.Height()/100)*13 , /*rect.Width()*/292, rect.Height()  ,SWP_SHOWWINDOW ) ; 
 		}
 		/////////////////////////////////////////////////////////////////////////////////////////
 		//////////////////////////////////设置社区动态超链接位置/////////////////////////////////
@@ -707,7 +685,7 @@ void CMainDlg::OnSize(UINT nType, int cx, int cy)
 		if ( NULL != pst ) {
 			CRect rect ;
 			pst->GetClientRect( rect ) ;
-			pst->SetWindowPos( NULL ,(rc.Width()/100)*92 ,(rc.Height()/100)*84  , rc.Width()/100*30, rect.Height()  ,SWP_SHOWWINDOW ) ; 
+			pst->SetWindowPos( NULL ,(rc.Width()/100)*93 ,(rc.Height()/100)*84  , rc.Width()/100*30, rect.Height()  ,SWP_SHOWWINDOW ) ; 
 		}
 		//设置最近交易2相关内容位置
 		pst = GetDlgItem( IDC_ST_SRCADDR2 ) ;
@@ -728,7 +706,7 @@ void CMainDlg::OnSize(UINT nType, int cx, int cy)
 		if ( NULL != pst ) {
 			CRect rect ;
 			pst->GetClientRect( rect ) ;
-			pst->SetWindowPos( NULL ,(rc.Width()/100)*92 ,(rc.Height()/100)*94 , rc.Width()/100*30, rect.Height()  ,SWP_SHOWWINDOW ) ; 
+			pst->SetWindowPos( NULL ,(rc.Width()/100)*93 ,(rc.Height()/100)*94 , rc.Width()/100*30, rect.Height()  ,SWP_SHOWWINDOW ) ; 
 		}
 		//设置最近交易3相关内容位置
 		pst = GetDlgItem( IDC_ST_SRCADDR3 ) ;
@@ -749,7 +727,7 @@ void CMainDlg::OnSize(UINT nType, int cx, int cy)
 		if ( NULL != pst ) {
 			CRect rect ;
 			pst->GetClientRect( rect ) ;
-			pst->SetWindowPos( NULL ,(rc.Width()/100)*92 ,rc.Height() - 40  , (rc.Width()/100)*30, rect.Height()  ,SWP_SHOWWINDOW ) ; 
+			pst->SetWindowPos( NULL ,(rc.Width()/100)*93 ,rc.Height() - 40  , (rc.Width()/100)*30, rect.Height()  ,SWP_SHOWWINDOW ) ; 
 		}
 
 		//设置跳转全部交易链接位置	

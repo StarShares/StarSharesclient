@@ -167,7 +167,7 @@ BOOL CZCOutDlg::OnInitDialog()
 		{"资产名称" ,      110}, 
 		{"转出账号" ,  280},
 		{"转出状态", 80},
-		{"人气星数量", 123},
+		{"红人秀数量", 123},
 		{"", 50}
 	};
 	m_lstOutDetail.SetBkColor(RGB(255, 255,255));       

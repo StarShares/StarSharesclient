@@ -293,7 +293,7 @@ namespace uistruct {
 		string AssetID ;					//发行的资产ID
 		string AssetName   ;		        //资产名称
 		string AssetIssuer;					//资产发行方
-		double PopNum;				//人气星数
+		double PopNum;				//红人秀数
 		double MaxNum;				//最高限额
 		double GoalNum;				//众筹目标
 		time_t IssueStartTime;					//发行日期

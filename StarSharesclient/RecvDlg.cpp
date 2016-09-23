@@ -19,6 +19,9 @@
 
 // CRecvDlg
 
+int m_nSortedCol=0;
+BOOL m_bAsc=TRUE;
+
 IMPLEMENT_DYNAMIC(CRecvDlg, CDialogBar)
 
 CRecvDlg::CRecvDlg()
@@ -53,7 +56,82 @@ BEGIN_MESSAGE_MAP(CRecvDlg, CDialogBar)
 	ON_BN_CLICKED(IDC_BUTTON_NEWADDRESS, &CRecvDlg::OnBnClickedButtonNewaddress)
 	ON_BN_CLICKED(IDC_COPYADDRESS, &CRecvDlg::OnBnClickedCopyaddress)
 	ON_BN_CLICKED(IDC_EXPORT_EXCEL, &CRecvDlg::OnBnClickedExportExel2)
+	ON_NOTIFY(LVN_COLUMNCLICK, IDC_LIST, OnColumnclickAddrlist)
+	
 END_MESSAGE_MAP()
+
+int CALLBACK CRecvDlg::FileListCompareFunction(LPARAM lParam1,LPARAM lParam2,LPARAM lParamSort)
+{
+	CListCtrl *pListCtrl = (CListCtrl*)lParamSort;
+	int rValue=0;
+
+	int nItem1,nItem2;
+	LVFINDINFO FindInfo;
+	FindInfo.flags=LVFI_PARAM;
+	FindInfo.lParam=lParam1;
+	nItem1=pListCtrl->FindItem(&FindInfo,-1);
+	FindInfo.lParam=lParam2;
+	nItem2=pListCtrl->FindItem(&FindInfo,-1);
+	if((nItem1 == -1)||(nItem2 == -1))
+	{
+		return 0;
+	}
+
+	CString str1,str2;
+	str1=pListCtrl->GetItemText(nItem1,m_nSortedCol);
+	str2=pListCtrl->GetItemText(nItem2,m_nSortedCol);
+
+	if(m_nSortedCol == 1 || m_nSortedCol == 2 || m_nSortedCol == 3)
+	{
+		if(m_bAsc)
+		{
+			rValue = strcmp(str1,str2);
+		}
+		else
+		{
+			rValue = strcmp(str2,str1);
+		}
+	}
+	else if(m_nSortedCol == 4 || m_nSortedCol == 0)
+	{
+		long num1,num2;
+		num1 = atoi(str1);
+		num2 = atoi(str2);
+		if(m_bAsc)
+		{
+			if(num1 == num2) rValue = 0;
+			else if(num1 > num2) rValue = 1;
+			else rValue = -1;
+		}
+		else
+		{
+			if(num1 == num2) rValue = 0;
+			else if(num1 < num2) rValue = 1;
+			else rValue = -1;
+		}
+	}
+
+	return rValue;
+}
+
+
+void CRecvDlg::OnColumnclickAddrlist(NMHDR* pNMHDR, LRESULT* pResult) 
+{
+	NM_LISTVIEW* pNMListView = (NM_LISTVIEW*)pNMHDR;
+	// TODO: Add your control notification handler code here
+	if(pNMListView->iSubItem == m_nSortedCol)
+	{
+		m_bAsc=!m_bAsc;
+	}
+	else
+	{
+		m_bAsc=TRUE;
+		m_nSortedCol=pNMListView->iSubItem;
+	}
+	m_listCtrl.SortItems(FileListCompareFunction,(DWORD)&m_listCtrl);
+
+	*pResult = 0;
+}
 
 void CRecvDlg::ShowListInfo()
 {
@@ -104,6 +182,8 @@ void CRecvDlg::ShowListInfo()
 
 		strShowData = strprintf("%.2f" , address.fMoney ) ;
 		m_listCtrl.SetItemText(i , ++nSubIdx , strShowData.c_str() ) ;
+
+		m_listCtrl.SetItemData(i,i);
 
 		i++;
 	}
@@ -499,6 +579,8 @@ void   CRecvDlg::ModifyListCtrlItem()
 
 			strShowData = strprintf("%.2f" ,addr.fMoney ) ;
 			m_listCtrl.SetItemText(i , ++nSubIdx , strShowData.c_str() ) ;
+
+			m_listCtrl.SetItemData(i,i);
 			break;
 		}
 	}
@@ -562,6 +644,8 @@ void   CRecvDlg::InsertListCtrlItem()
 
 	strShowData =strprintf("%.2f" , addr.fMoney ) ;
 	m_listCtrl.SetItemText(i , ++nSubIdx , strShowData.c_str() ) ;
+
+	m_listCtrl.SetItemData(i,i);
 
 }
 

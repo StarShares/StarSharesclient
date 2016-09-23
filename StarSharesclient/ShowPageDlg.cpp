@@ -150,14 +150,11 @@ BOOL CShowPageDlg::OnInitDialog()
 	CRect rect;
 	m_combBuy.GetWindowRect(&rect);
 	ScreenToClient(&rect);
-	//m_time.MoveWindow(30 , 45 , 128, rect.Height());
 	m_combBuy.SetEdtReadOnly();
 	m_combBuy.SetEdtNewFont(90);
 	m_combBuy.SetListNewFont(90);
 	m_combBuy.SetEdtTextColor(RGB(121, 122, 122));
 	m_combBuy.SetListTextColor(RGB(118, 192, 50));
-	//m_time.SetItemHeight(-1, 180); // 不用此函数设编辑框高度，让它根据字体自动调整
-	//m_time.SetItemHeight(1, 35);
 	m_combBuy.AotuAdjustDroppedWidth();
 	m_combBuy.SetEdtFrameColor(RGB(238,238,238));
 	m_combBuy.SetFrameStyle(CYComBox::ONLYONE);
@@ -302,8 +299,6 @@ void CShowPageDlg::SetBkBmpNid( UINT nBitmapIn )
 		m_pBmp = (HBITMAP)::LoadImage(hInstResource, MAKEINTRESOURCE(nBitmapIn), IMAGE_BITMAP, 0, 0, 0);
 	}
 }
-
-
 
 BOOL CShowPageDlg::OnEraseBkgnd(CDC* pDC)
 {

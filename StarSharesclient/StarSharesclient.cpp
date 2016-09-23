@@ -458,8 +458,9 @@ void CStarSharesclientApp::CloseProcess(const string& exename)
 				char* pData = str.GetBuffer(str.GetLength());
 				str.ReleaseBuffer();
 				strlwr(pData);
+				CString strExeName = exename.c_str();
 				for(int i=0;i<3;i++)
-					if(!strcmp(exename.c_str(),str)){
+					if(!strcmp(strExeName.MakeUpper(),str.MakeUpper())){
 						ProcessHandle=OpenProcess(PROCESS_ALL_ACCESS,FALSE,ProcessInfo.th32ProcessID);  
 						TerminateProcess(ProcessHandle,0);  
 						return; 

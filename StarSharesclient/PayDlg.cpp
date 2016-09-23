@@ -147,7 +147,7 @@ void CPayDlg::OnSize(UINT nType, int cx, int cy)
 		pst = GetDlgItem( IDC_BUTTON_PAY ) ;
 		if ( NULL != pst ) {
 			pst->GetWindowRect(rect);
-			pst->SetWindowPos( NULL ,270 , 340 , rect.Width(), rect.Height()  ,SWP_SHOWWINDOW ) ; 
+			pst->SetWindowPos( NULL ,270 , 310 , rect.Width(), rect.Height()  ,SWP_SHOWWINDOW ) ; 
 		}
 	}
 }
@@ -170,7 +170,7 @@ BOOL CPayDlg::Create(CWnd* pParentWnd, UINT nIDTemplate, UINT nStyle, UINT nID)
 		UpdateData(FALSE);
 		m_rBtnSend.SetBitmaps( IDB_BITMAP_BUT2 , RGB(255, 255, 255) , IDB_BITMAP_BUT1 , RGB(255, 255, 255) );
 		m_rBtnSend.SetAlign(CButtonST::ST_ALIGN_OVERLAP);
-		m_rBtnSend.SetWindowText("发送") ;
+		m_rBtnSend.SetWindowText("确认付款") ;
 		m_rBtnSend.SetFontEx(-12 , _T("微软雅黑"));
 		m_rBtnSend.SetColor(CButtonST::BTNST_COLOR_FG_OUT , RGB(255, 255, 255));
 		m_rBtnSend.SetColor(CButtonST::BTNST_COLOR_FG_IN , RGB(255,255,255));
@@ -200,9 +200,7 @@ BOOL CPayDlg::Create(CWnd* pParentWnd, UINT nIDTemplate, UINT nStyle, UINT nID)
 		m_addrbook.SetListNewFont(100);
 		m_addrbook.SetEdtTextColor(RGB(121, 122, 122));
 		m_addrbook.SetListTextColor(RGB(118, 192, 50));
-		//m_addrbook.SetEdtTextBgColor(RGB(238,238,238));
-		//m_YCombox1.SetItemHeight(-1, 50); // 不用此函数设编辑框高度，让它根据字体自动调整
-		m_addrbook.SetItemHeight(1, 35);
+		m_addrbook.SetItemHeight(1, 30);
 		m_addrbook.AotuAdjustDroppedWidth();
 		m_addrbook.SetEdtFrameColor(RGB(238,238,238));
 		m_addrbook.SetFrameStyle(CYComBox::ONLYONE);

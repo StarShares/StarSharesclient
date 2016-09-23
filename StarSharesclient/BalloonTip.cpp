@@ -529,7 +529,7 @@ void CBalloonTip::OnPaint()
 	if (m_showpic)
 	{
 		CBitmap          m_bmp;
-		//m_bmp.LoadBitmap(IDB_BITMAP_BALLON_CLOSE);
+		m_bmp.LoadBitmap(IDB_BITMAP_BALLON_CLOSE);
 
 
 		BITMAP bm1;

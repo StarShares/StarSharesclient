@@ -3,7 +3,6 @@
 #include "listctrlcl.h"
 
 // CRGZCDlg ¶Ô»°¿ò
-#define TIMER_ASSETBUY 1009
 
 class CRGZCDlg : public CDialogEx
 {

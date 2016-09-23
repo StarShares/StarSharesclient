@@ -898,6 +898,12 @@ void CStarSharesclientDlg::DestroyDlg()
 		delete m_pSetDlg;
 		m_pSetDlg = NULL;
 	}
+
+	if(NULL != m_pOutGifDlg)
+	{
+		delete m_pOutGifDlg;
+		m_pOutGifDlg = NULL;
+	}
 }
 
 void CStarSharesclientDlg::OnTimer(UINT_PTR nIDEvent)
@@ -937,7 +943,7 @@ void CStarSharesclientDlg::OnTimer(UINT_PTR nIDEvent)
 		nid.uCallbackMessage=WM_SHOWTASK;//自定义的消息名称 
 		nid.hIcon=LoadIcon(AfxGetInstanceHandle(),MAKEINTRESOURCE(IDR_MAINFRAME)); 
 		memset(nid.szTip,0,128);
-		strcpy_s(nid.szTip,"StarSharesclient"); //信息提示条 
+		strcpy_s(nid.szTip,"StarShares"); //信息提示条 
 		if ( !Shell_NotifyIcon( NIM_MODIFY, &nid ) )  
 			Shell_NotifyIcon( NIM_ADD, &nid );  
 
@@ -1054,7 +1060,7 @@ void CStarSharesclientDlg::DeleteTray()
 	nid.uFlags=NIF_ICON|NIF_MESSAGE|NIF_TIP ; 
 	nid.uCallbackMessage=WM_SHOWTASK; //自定义的消息名称 
 	nid.hIcon=LoadIcon(AfxGetInstanceHandle(),MAKEINTRESOURCE(IDR_MAINFRAME)); 
-	strcpy_s(nid.szTip,"StarSharesclient"); //信息提示条为“计划任务提醒” 
+	strcpy_s(nid.szTip,"StarShares"); //信息提示条为“计划任务提醒” 
 	Shell_NotifyIcon(NIM_DELETE,&nid); //在托盘区删除图标 
 } 
 

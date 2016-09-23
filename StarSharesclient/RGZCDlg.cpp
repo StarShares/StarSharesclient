@@ -22,6 +22,11 @@ CRGZCDlg::CRGZCDlg(CWnd* pParent /*=NULL*/)
 
 CRGZCDlg::~CRGZCDlg()
 {
+	if( NULL != m_pBmp ) {
+		::DeleteObject( m_pBmp ) ;
+		m_pBmp = NULL ;
+	}
+
 	if(NULL != m_pRollDlg)
 	{
 		delete m_pRollDlg;
@@ -57,7 +62,7 @@ BOOL CRGZCDlg::OnInitDialog()
 	struct LISTCol {
 		CString		name ;
 		UINT		size ;
-	} listcol[7]  = {
+	} listcol[6]  = {
 		{"资产名称" ,      150},
 		{"发行方" ,      150},
 		{"目前累计资金" ,      120}, 
@@ -72,7 +77,7 @@ BOOL CRGZCDlg::OnInitDialog()
 	m_lstBoughtAsset.SetHeaderBKColor(87, 101, 112, 0); 
 	m_lstBoughtAsset.SetHeaderTextColor(RGB(255,255,255)); 
 	m_lstBoughtAsset.SetTextColor(RGB(0,0,0));  
-	for( int i = 0 ; i <7 ; i++  ) {
+	for( int i = 0 ; i <6 ; i++  ) {
 		m_lstBoughtAsset.InsertColumn(i,listcol[i].name,LVCFMT_CENTER,listcol[i].size);
 	}
 	m_lstBoughtAsset.SetExtendedStyle(LVS_EX_FULLROWSELECT | LVS_EX_HEADERDRAGDROP );
@@ -142,7 +147,7 @@ int CRGZCDlg::OnCreate(LPCREATESTRUCT lpCreateStruct)
 		m_pRollDlg->SetWindowPos(NULL, 27, 30, 724, 208, SWP_SHOWWINDOW);
 	}
 
-	SetTimer(TIMER_ASSETBUY, 60000, NULL);
+	SetTimer(0x10, 60000, NULL);
 
 	return 0;
 }
@@ -164,8 +169,6 @@ void CRGZCDlg::OnSize(UINT nType, int cx, int cy)
 			pst->SetWindowPos(NULL, 32, 290, 716, 126, SWP_SHOWWINDOW);
 		}
 	}
-
-
 }
 
 LRESULT CRGZCDlg::OnShowListCtrl(  WPARAM wParam, LPARAM lParam )
@@ -198,7 +201,7 @@ void  CRGZCDlg::OninitializeList()
 	ShowComboxCotent();
 }
 
-void    CRGZCDlg::ShowComboxCotent()
+void CRGZCDlg::ShowComboxCotent()
 {
 	uistruct::BOUGHTASSETLIST bougthAssetList;
 	m_AllAssetList.clear();
@@ -212,14 +215,14 @@ void    CRGZCDlg::ShowComboxCotent()
 
 	string strCond0 =  condtion;
 
-	string tempConditon = "confirm_height=0 and state = 1 ";
+	string tempConditon = "confirm_height=0 and state != 1 ";
 	tempConditon +=strCond0;
 	strCond0 = tempConditon;
 
 	theApp.m_SqliteDeal.GetTransactionList(strCond0, &pListInfo); 
 
 	uistruct::TRANSRECORDLIST pListInfo1;
-	string strCond = " confirm_height!=0 and state = 1 "+ condtion;
+	string strCond = " confirm_height!=0 and state != 2 "+ condtion;
 
 	theApp.m_SqliteDeal.GetTransactionList(strCond, &pListInfo1); 
 
@@ -241,6 +244,7 @@ void    CRGZCDlg::ShowComboxCotent()
 			{
 				TRACE("OnBnClickedSendtrnsfer rpccmd sendtoaddress error");
 				//return;
+				continue;
 			}
 
 			strShowData = root["ret"].toStyledString();
@@ -249,9 +253,10 @@ void    CRGZCDlg::ShowComboxCotent()
 			{
 				TRACE("OnBnClickedSendtrnsfer rpccmd sendtoaddress error");
 				//return;
+				continue;
 			}
 		
-			strCond = strprintf( "des_addr = '%s'",const_it->AssetAddr.c_str());
+			strCond = strprintf( "des_addr = '%s' and state != 2",const_it->AssetAddr.c_str());
 			double dmoney = theApp.m_SqliteDeal.GetTableItemSum(_T("t_transaction"), _T("money"), strCond);
 
 			if(dmoney > 0 )
@@ -332,26 +337,33 @@ void CRGZCDlg::OnShowListCtrl(uistruct::BOUGHTASSETLIST pListInfo){
 void CRGZCDlg::OnTimer(UINT_PTR nIDEvent)
 {
 	// TODO: 在此添加消息处理程序代码和/或调用默认值
-	if(0 == m_pRollDlg->m_VecAssetList.size())
+	switch(nIDEvent)
 	{
-		return;
+	case 0x10:
+		{
+			if(0 == m_pRollDlg->m_VecAssetList.size())
+			{
+				return;
+			}
+
+			m_pRollDlg->RefreshCurPage();
+
+			CStarSharesclientDlg* pPopDlg = (CStarSharesclientDlg*)AfxGetApp()->m_pMainWnd;
+			if(NULL != pPopDlg)
+			{
+				pPopDlg->LoadAllAsset();
+			}
+
+			OninitializeList();
+
+			m_pRollDlg->ClearControl();
+			m_pRollDlg->LayoutDlg(m_pRollDlg->m_nCurAssetIndex);
+		}
+		break;
+	default:
+		break;
 	}
 
-	m_pRollDlg->RefreshCurPage();
-
-	CStarSharesclientDlg* pPopDlg = (CStarSharesclientDlg*)AfxGetApp()->m_pMainWnd;
-	if(NULL != pPopDlg)
-	{
-		pPopDlg->LoadAllAsset();
-
-		string strCondition = "Status = 3 order by ID ASC";
-		theApp.m_SqliteDeal.GetAssetList(strCondition, (&m_pRollDlg->m_VecAssetList));
-	}
-
-	OninitializeList();
-	
-	m_pRollDlg->ClearControl();
-	m_pRollDlg->LayoutDlg(m_pRollDlg->m_nCurAssetIndex);
 
 	CDialogEx::OnTimer(nIDEvent);
 }

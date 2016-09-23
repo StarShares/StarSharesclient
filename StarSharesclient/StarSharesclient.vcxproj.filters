@@ -337,6 +337,9 @@
     <None Include="res\tck_qk2.bmp">
       <Filter>资源文件</Filter>
     </None>
+    <None Include="res\BallonClose.bmp">
+      <Filter>资源文件</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StarSharesclient.h">
@@ -615,6 +618,9 @@
     <ClInclude Include="json\writer.h">
       <Filter>json</Filter>
     </ClInclude>
+    <ClInclude Include="ShowSingleTxDlg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="StarSharesclient.cpp">
@@ -831,6 +837,9 @@
       <Filter>json</Filter>
     </ClCompile>
     <ClCompile Include="StarSharesDB.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ShowSingleTxDlg.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
