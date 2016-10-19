@@ -83,6 +83,8 @@ public:
 	virtual BOOL Create(CWnd* pParentWnd, UINT nIDTemplate, UINT nStyle, UINT nID);
 	virtual BOOL PreTranslateMessage(MSG* pMsg);
 	afx_msg void OnBnClickedBtnMoreInfo();
+
+	LONG GetRegKey(HKEY key, LPCTSTR subkey, LPTSTR retdata);
 	
 };
 
